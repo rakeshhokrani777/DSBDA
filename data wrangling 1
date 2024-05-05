@@ -1,0 +1,39 @@
+import pandas as pd
+df = pd.read_csv("C:\\Users\\rakes\\Downloads\\weather_data.csv")  #edit the path
+print(df)
+
+
+df.head() #-----Gives first 5  rows of the dataframe
+
+df.tail() #------Gives last 5  rows of the dataframe
+
+df.describe()#---- Gives all the quantitative data like mean and all in rows and columns
+
+missing_data=df.isnull() 
+print(missing_data)#--------Prints all the null values in dataset
+
+df.dropna(axis=1)#-----Gives the column without any null values
+df.dropna(how='all')
+
+# following process is to find mean of temperature and rplace it with NaN values
+df.dropna(subset=['temperature'])
+
+mean_temp=df['temperature'].mean()
+# print(mean_temp)
+df['temperature']=df['temperature'].fillna(mean_temp)
+print(df)
+
+#following process is to find mean of windspeed and rplace it with NaN values
+df.dropna(subset=['windspeed'])
+mean_wspeed=df['windspeed'].mean()
+df['windspeed']=df['windspeed'].fillna(mean_wspeed)
+print(df)
+
+#process to change the categorical event 
+df.dropna(subset=['event'])
+df['event']=df['event'].fillna("No_event")
+print(df)
+
+df.dtypes#--------gives datatypes of the given dataset
+
+print(df)
